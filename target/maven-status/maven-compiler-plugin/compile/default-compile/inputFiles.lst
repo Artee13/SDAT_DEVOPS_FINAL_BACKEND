@@ -1,2 +1,6 @@
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/SdatDevopsFinalBackendApplication.java
+/Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/controller/AirportController.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/controller/HealthController.java
+/Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/entity/Airport.java
+/Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/repository/AirportRepository.java
+/Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/service/AirportService.java
