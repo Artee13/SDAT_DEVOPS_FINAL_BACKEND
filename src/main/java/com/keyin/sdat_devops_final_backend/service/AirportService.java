@@ -19,7 +19,29 @@ public class AirportService {
         return airportRepository.findAll();
     }
 
+    public Airport getById(Long id) {
+        return airportRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Airport not found: " + id));
+    }
+
     public Airport create(Airport airport) {
         return airportRepository.save(airport);
+    }
+
+    public Airport update(Long id, Airport updated) {
+        Airport existing = getById(id);
+
+        existing.setCode(updated.getCode());
+        existing.setName(updated.getName());
+        existing.setCity(updated.getCity());
+        existing.setCountry(updated.getCountry());
+        existing.setTimezone(updated.getTimezone());
+
+        return airportRepository.save(existing);
+    }
+
+    public void delete(Long id) {
+        Airport existing = getById(id);
+        airportRepository.delete(existing);
     }
 }

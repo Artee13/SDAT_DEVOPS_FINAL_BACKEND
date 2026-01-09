@@ -22,9 +22,23 @@ public class AirportController {
         return airportService.getAll();
     }
 
+    @GetMapping("/{id}")
+    public Airport getById(@PathVariable Long id) {
+        return airportService.getById(id);
+    }
+
     @PostMapping
     public Airport create(@RequestBody Airport airport) {
         return airportService.create(airport);
     }
-}
 
+    @PutMapping("/{id}")
+    public Airport update(@PathVariable Long id, @RequestBody Airport airport) {
+        return airportService.update(id, airport);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        airportService.delete(id);
+    }
+}
