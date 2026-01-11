@@ -6,8 +6,12 @@ import org.springframework.context.annotation.Configuration;
 
 import com.keyin.sdat_devops_final_backend.entity.Airport;
 import com.keyin.sdat_devops_final_backend.repository.AirportRepository;
+
 import com.keyin.sdat_devops_final_backend.entity.Airline;
 import com.keyin.sdat_devops_final_backend.repository.AirlineRepository;
+
+import com.keyin.sdat_devops_final_backend.entity.Gate;
+import com.keyin.sdat_devops_final_backend.repository.GateRepository;
 
 @Configuration
 public class DataSeeder {
@@ -72,6 +76,26 @@ CommandLineRunner seedAirlines(AirlineRepository airlineRepository) {
         }
     };
 }
+
+@Bean
+CommandLineRunner seedGates(GateRepository gateRepository, AirportRepository airportRepository) {
+    return args -> {
+        if (gateRepository.count() == 0) {
+
+            Airport yyt = airportRepository.findByCode("YYT")
+                    .orElseThrow(() -> new RuntimeException("YYT not found"));
+            Airport yyz = airportRepository.findByCode("YYZ")
+                    .orElseThrow(() -> new RuntimeException("YYZ not found"));
+
+            gateRepository.save(new Gate("A1", "T1", yyt));
+            gateRepository.save(new Gate("A2", "T1", yyt));
+
+            gateRepository.save(new Gate("B3", "T1", yyz));
+            gateRepository.save(new Gate("B4", "T1", yyz));
+        }
+    };
+}
+
 
 }
 
