@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.keyin.sdat_devops_final_backend.entity.Airport;
 import com.keyin.sdat_devops_final_backend.repository.AirportRepository;
+import com.keyin.sdat_devops_final_backend.entity.Airline;
+import com.keyin.sdat_devops_final_backend.repository.AirlineRepository;
 
 @Configuration
 public class DataSeeder {
@@ -41,4 +43,35 @@ public class DataSeeder {
             }
         };
     }
+
+    @Bean
+CommandLineRunner seedAirlines(AirlineRepository airlineRepository) {
+    return args -> {
+        if (airlineRepository.count() == 0) {
+
+            airlineRepository.save(new Airline(
+                    "AC",
+                    "Air Canada",
+                    "Canada",
+                    null
+            ));
+
+            airlineRepository.save(new Airline(
+                    "WS",
+                    "WestJet",
+                    "Canada",
+                    null
+            ));
+
+            airlineRepository.save(new Airline(
+                    "DL",
+                    "Delta Air Lines",
+                    "USA",
+                    null
+            ));
+        }
+    };
 }
+
+}
+
