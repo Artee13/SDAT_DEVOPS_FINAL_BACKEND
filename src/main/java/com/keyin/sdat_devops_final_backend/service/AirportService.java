@@ -1,6 +1,7 @@
 package com.keyin.sdat_devops_final_backend.service;
 
 import com.keyin.sdat_devops_final_backend.entity.Airport;
+import com.keyin.sdat_devops_final_backend.exception.NotFoundException;
 import com.keyin.sdat_devops_final_backend.repository.AirportRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class AirportService {
 
     public Airport getById(Long id) {
         return airportRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Airport not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Airport not found: " + id));
     }
 
     public Airport create(Airport airport) {

@@ -1,6 +1,7 @@
 package com.keyin.sdat_devops_final_backend.service;
 
 import com.keyin.sdat_devops_final_backend.entity.Airline;
+import com.keyin.sdat_devops_final_backend.exception.NotFoundException;
 import com.keyin.sdat_devops_final_backend.repository.AirlineRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class AirlineService {
 
     public Airline getById(Long id) {
         return airlineRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Airline not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Airline not found: " + id));
     }
 
     public Airline create(Airline airline) {

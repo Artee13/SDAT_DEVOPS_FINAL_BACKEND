@@ -2,6 +2,7 @@ package com.keyin.sdat_devops_final_backend.service;
 
 import com.keyin.sdat_devops_final_backend.controller.dto.FlightRequest;
 import com.keyin.sdat_devops_final_backend.entity.*;
+import com.keyin.sdat_devops_final_backend.exception.NotFoundException;
 import com.keyin.sdat_devops_final_backend.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -53,11 +54,11 @@ public class FlightService {
 
     private Flight buildFlightFromRequest(Flight flight, FlightRequest req) {
         Airport airport = airportRepository.findById(req.airportId)
-                .orElseThrow(() -> new RuntimeException("Airport not found: " + req.airportId));
+                .orElseThrow(() -> new NotFoundException("Airport not found: " + req.airportId));
         Airline airline = airlineRepository.findById(req.airlineId)
-                .orElseThrow(() -> new RuntimeException("Airline not found: " + req.airlineId));
+                .orElseThrow(() -> new NotFoundException("Airline not found: " + req.airlineId));
         Gate gate = gateRepository.findById(req.gateId)
-                .orElseThrow(() -> new RuntimeException("Gate not found: " + req.gateId));
+                .orElseThrow(() -> new NotFoundException("Gate not found: " + req.gateId));
 
         flight.setFlightNumber(req.flightNumber);
         flight.setType(FlightType.valueOf(req.type));
