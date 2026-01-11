@@ -6,6 +6,7 @@
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/controller/GateController.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/controller/HealthController.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/controller/dto/FlightRequest.java
+/Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/controller/dto/FlightResponse.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/controller/dto/GateRequest.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/entity/Airline.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/entity/Airport.java
@@ -13,6 +14,8 @@
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/entity/FlightStatus.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/entity/FlightType.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/entity/Gate.java
+/Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/exception/GlobalExceptionHandler.java
+/Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/exception/NotFoundException.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/repository/AirlineRepository.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/repository/AirportRepository.java
 /Users/student/SDAT_DEVOPS_FINAL_BACKEND/src/main/java/com/keyin/sdat_devops_final_backend/repository/FlightRepository.java

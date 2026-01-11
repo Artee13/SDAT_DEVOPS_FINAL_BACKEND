@@ -1,6 +1,7 @@
 package com.keyin.sdat_devops_final_backend.controller;
 
 import com.keyin.sdat_devops_final_backend.controller.dto.FlightRequest;
+import com.keyin.sdat_devops_final_backend.controller.dto.FlightResponse;
 import com.keyin.sdat_devops_final_backend.entity.Flight;
 import com.keyin.sdat_devops_final_backend.entity.FlightType;
 import com.keyin.sdat_devops_final_backend.service.FlightService;
@@ -20,7 +21,7 @@ public class FlightController {
     }
 
     @GetMapping
-    public List<Flight> getAll(
+    public List<FlightResponse> getAll(
             @RequestParam(required = false) Long airportId,
             @RequestParam(required = false) String type
     ) {
@@ -29,7 +30,7 @@ public class FlightController {
     }
 
     @GetMapping("/{id}")
-    public Flight getById(@PathVariable Long id) {
+    public FlightResponse getById(@PathVariable Long id) {
         return flightService.getById(id);
     }
 

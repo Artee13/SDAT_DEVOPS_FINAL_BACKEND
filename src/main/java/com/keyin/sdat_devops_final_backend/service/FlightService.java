@@ -1,6 +1,7 @@
 package com.keyin.sdat_devops_final_backend.service;
 
 import com.keyin.sdat_devops_final_backend.controller.dto.FlightRequest;
+import com.keyin.sdat_devops_final_backend.controller.dto.FlightResponse;
 import com.keyin.sdat_devops_final_backend.entity.*;
 import com.keyin.sdat_devops_final_backend.exception.NotFoundException;
 import com.keyin.sdat_devops_final_backend.repository.*;
@@ -27,16 +28,21 @@ public class FlightService {
         this.gateRepository = gateRepository;
     }
 
-    public List<Flight> getAll(Long airportId, FlightType type) {
+    public List<FlightResponse> getAll(Long airportId, FlightType type) {
+        List<Flight> flights;
+
         if (airportId != null && type != null) {
-            return flightRepository.findByAirportIdAndType(airportId, type);
+            flights = flightRepository.findByAirportIdAndType(airportId, type);
+        } else {
+            flights = flightRepository.findAll();
         }
-        return flightRepository.findAll();
+
+        return flights.stream().map(this::toResponse).toList();
     }
 
-    public Flight getById(Long id) {
-        return flightRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Flight not found: " + id));
+    public FlightResponse getById(Long id) {
+        Flight flight = getEntityById(id);
+        return toResponse(flight);
     }
 
     public Flight create(FlightRequest req) {
@@ -44,19 +50,26 @@ public class FlightService {
     }
 
     public Flight update(Long id, FlightRequest req) {
-        Flight existing = getById(id);
+        Flight existing = getEntityById(id);
         return flightRepository.save(buildFlightFromRequest(existing, req));
     }
 
     public void delete(Long id) {
-        flightRepository.delete(getById(id));
+        flightRepository.delete(getEntityById(id));
+    }
+
+    private Flight getEntityById(Long id) {
+        return flightRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Flight not found: " + id));
     }
 
     private Flight buildFlightFromRequest(Flight flight, FlightRequest req) {
         Airport airport = airportRepository.findById(req.airportId)
                 .orElseThrow(() -> new NotFoundException("Airport not found: " + req.airportId));
+
         Airline airline = airlineRepository.findById(req.airlineId)
                 .orElseThrow(() -> new NotFoundException("Airline not found: " + req.airlineId));
+
         Gate gate = gateRepository.findById(req.gateId)
                 .orElseThrow(() -> new NotFoundException("Gate not found: " + req.gateId));
 
@@ -75,5 +88,34 @@ public class FlightService {
         flight.setGate(gate);
 
         return flight;
+    }
+
+    private FlightResponse toResponse(Flight flight) {
+        FlightResponse r = new FlightResponse();
+
+        r.id = flight.getId();
+
+        r.flightNumber = flight.getFlightNumber();
+        r.type = flight.getType();
+        r.status = flight.getStatus();
+
+        r.scheduledTime = flight.getScheduledTime();
+        r.estimatedTime = flight.getEstimatedTime();
+
+        r.origin = flight.getOrigin();
+        r.destination = flight.getDestination();
+
+        r.airportId = flight.getAirport().getId();
+        r.airportCode = flight.getAirport().getCode();
+
+        r.airlineId = flight.getAirline().getId();
+        r.airlineCode = flight.getAirline().getCode();
+        r.airlineName = flight.getAirline().getName();
+
+        r.gateId = flight.getGate().getId();
+        r.gateName = flight.getGate().getName();
+        r.gateTerminal = flight.getGate().getTerminal();
+
+        return r;
     }
 }
