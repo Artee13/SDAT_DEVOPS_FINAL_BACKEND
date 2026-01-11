@@ -4,14 +4,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.keyin.sdat_devops_final_backend.entity.Airport;
 import com.keyin.sdat_devops_final_backend.repository.AirportRepository;
-
-import com.keyin.sdat_devops_final_backend.entity.Airline;
 import com.keyin.sdat_devops_final_backend.repository.AirlineRepository;
-
-import com.keyin.sdat_devops_final_backend.entity.Gate;
 import com.keyin.sdat_devops_final_backend.repository.GateRepository;
+
+import com.keyin.sdat_devops_final_backend.entity.*;
+import com.keyin.sdat_devops_final_backend.repository.FlightRepository;
 
 @Configuration
 public class DataSeeder {
@@ -92,6 +90,61 @@ CommandLineRunner seedGates(GateRepository gateRepository, AirportRepository air
 
             gateRepository.save(new Gate("B3", "T1", yyz));
             gateRepository.save(new Gate("B4", "T1", yyz));
+        }
+    };
+}
+
+
+@Bean
+CommandLineRunner seedFlights(FlightRepository flightRepository,
+                              AirportRepository airportRepository,
+                              AirlineRepository airlineRepository,
+                              GateRepository gateRepository) {
+    return args -> {
+        if (flightRepository.count() == 0) {
+
+            Airport yyt = airportRepository.findByCode("YYT").orElseThrow();
+            Airport yyz = airportRepository.findByCode("YYZ").orElseThrow();
+
+            Airline ac = airlineRepository.findByCode("AC").orElseThrow();
+            Airline ws = airlineRepository.findByCode("WS").orElseThrow();
+
+            // Pick gates by id  - A1 is usually id=1 etc.
+            Gate a1 = gateRepository.findById(1L).orElseThrow();
+            Gate b3 = gateRepository.findById(3L).orElseThrow();
+
+            flightRepository.save(new Flight(
+                    "AC101",
+                    FlightType.DEPARTURE,
+                    FlightStatus.BOARDING,
+                    java.time.LocalDateTime.now().plusHours(1),
+                    null,
+                    "St. John's",
+                    "Toronto",
+                    yyt, ac, a1
+            ));
+
+            flightRepository.save(new Flight(
+                    "WS220",
+                    FlightType.ARRIVAL,
+                    FlightStatus.ON_TIME,
+                    java.time.LocalDateTime.now().plusMinutes(45),
+                    null,
+                    "Toronto",
+                    "St. John's",
+                    yyt, ws, a1
+            ));
+
+            flightRepository.save(new Flight(
+                    "AC555",
+                    FlightType.DEPARTURE,
+                    FlightStatus.ON_TIME,
+                    java.time.LocalDateTime.now().plusHours(2),
+                    null,
+                    "Toronto",
+                    "St. John's",
+                    yyz, ac, b3
+            ));
         }
     };
 }
