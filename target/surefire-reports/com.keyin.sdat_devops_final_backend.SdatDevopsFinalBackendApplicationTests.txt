@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.keyin.sdat_devops_final_backend.SdatDevopsFinalBackendApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.756 s -- in com.keyin.sdat_devops_final_backend.SdatDevopsFinalBackendApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.743 s -- in com.keyin.sdat_devops_final_backend.SdatDevopsFinalBackendApplicationTests
